@@ -1168,9 +1168,10 @@ acorn@^7.0.0, acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.1.tgz#e35668de0b402f359de515c5482a1ab9f89a69bf"
   integrity sha512-add7dgA5ppRPxCFJoAGfMDi7PIBXq1RtGo7BhbLaxwrXPOmw8gq48Y9ozT01hUKy9byMjlR20EJhu5zlkErEkg==
 
-"admin-lte@https://github.com/ColorlibHQ/AdminLTE#v3.0.4":
+admin-lte@^3.0:
   version "3.0.4"
-  resolved "https://github.com/ColorlibHQ/AdminLTE#4723bccf4321f28d9ac8ec4f8c64b785e277ba71"
+  resolved "https://registry.yarnpkg.com/admin-lte/-/admin-lte-3.0.4.tgz#c80d0b1e2c7e657c9557a653318437c722e31842"
+  integrity sha512-OsA/yzAPyZgm3WsQYBXOMO8FZx2+kYoiSV6vYWwluSvenTYW/8CRrsIZFck2WndcZnMx9/HReWo5ePJXD3Xc2g==
   dependencies:
     "@fortawesome/fontawesome-free" "^5.13.0"
     "@fullcalendar/bootstrap" "^4.4.0"
@@ -5112,6 +5113,11 @@ jquery@>=1.10, jquery@>=1.12.0, jquery@>=1.7, jquery@>=2.1.0, jquery@^3.0, "jque
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
   integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
+
+jquery@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
+  integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
 
 jqvmap-novulnerability@^1.5.1:
   version "1.5.1"
