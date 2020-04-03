@@ -4,6 +4,10 @@
 require:
   - rubocop-rails
 
+AllCops:
+  Exclude:
+    - db/migrate/**
+
 Rails/ActionFilter:
   Enabled: true
   EnforcedStyle: action
