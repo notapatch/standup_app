@@ -18,7 +18,7 @@ RSpec.describe "SignInProcesses", type: :system do
 
     click_button "Sign In"
 
-    expect(current_path).to eql(root_path)
+    expect(page).to have_current_path(root_path)
   end
 
   it "should fail on an invalid user" do
@@ -31,6 +31,6 @@ RSpec.describe "SignInProcesses", type: :system do
 
     click_button "Sign In"
 
-    expect(current_path).to eql(new_user_session_path)
+    expect(page).to have_current_path(new_user_session_path)
   end
 end
