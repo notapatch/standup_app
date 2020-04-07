@@ -1,14 +1,29 @@
 require "rails_helper"
 
 RSpec.describe "Users", type: :request do
+  let(:admin_account) { create(:admin_account) }
+  let(:admin_account_with_users) { create(:admin_account_with_users) }
+
   before do
-    sign_in create(:user)
+    sign_in admin_account
   end
 
-  describe "GET /index" do
+  describe "GET #index" do
     it "returns http success" do
-      get "/users/index"
+      get account_users_path
+
       expect(response).to have_http_status(:success)
+    end
+
+    it "lists users" do
+      sign_out admin_account
+      sign_in admin_account_with_users
+
+      get account_users_path
+      expect(response).to have_http_status(:success)
+      admin_account_with_users.account.users.each do |user|
+        expect(response.body).to include(user.name)
+      end
     end
   end
 

@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  helper_method :current_account
+
+  def current_account
+    @current_account ||= current_user.account
+  end
+
   def layout_by_resource
     if devise_controller?
       "devise"
