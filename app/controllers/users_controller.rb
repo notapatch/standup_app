@@ -4,6 +4,11 @@ class UsersController < ApplicationController
   def index
   end
 
+  def new
+    @user = User.new
+    set_choices
+  end
+
   def me
     @user = current_user
   end
@@ -27,6 +32,10 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_users
     @users = current_account.users
+  end
+
+  def set_choices
+    @choices = [["Admin", "admin"], ["User", "user"]]
   end
 
   def user_params

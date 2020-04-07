@@ -43,10 +43,10 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "GET /new" do
+  describe "GET #new" do
     it "returns http success" do
-      skip
-      get "/users/new"
+      get new_account_user_path
+
       expect(response).to have_http_status(:success)
     end
   end
