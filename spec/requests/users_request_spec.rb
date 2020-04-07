@@ -27,10 +27,10 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "GET /show" do
+  describe "GET #me" do
     it "returns http success" do
-      skip
-      get "/users/show"
+      get my_settings_path
+
       expect(response).to have_http_status(:success)
     end
   end
