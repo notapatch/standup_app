@@ -51,10 +51,29 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      skip
-      get "/users/create"
+  describe "POST #create" do
+    it "creates a user" do
+      expect {
+        post account_users_path, params: {user: attributes_for(:user, {role: "user"})}
+      }.to change { User.count }.by(1)
+
+      expect(response).to redirect_to(account_users_path)
+    end
+
+    it "does not create user on invalid data" do
+      expect {
+        post account_users_path, params: {user: attributes_for(:user, {email: nil, role: "user"})}
+      }.to change { User.count }.by(0)
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it "fails on non-unique email" do
+      user = create(:user)
+      expect {
+        post account_users_path, params: {user: attributes_for(:user, {email: user.email, role: "user"})}
+      }.to change { User.count }.by(0)
+
       expect(response).to have_http_status(:success)
     end
   end

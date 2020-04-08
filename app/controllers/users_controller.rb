@@ -27,6 +27,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def create
+    @user = User.unscoped.new(user_params.except("role"))
+    @user.account = current_account
+    @user.password = "password123"
+
+    respond_to do |format|
+      if @user.valid? && @user.invite!(current_user)
+        @user.add_role user_role, current_account
+        format.html {
+          redirect_to account_users_path,
+            notice: "User was successfully invited."
+        }
+      else
+        set_choices
+        format.html { render :new }
+      end
+    rescue ActiveRecord::RecordNotUnique
+      flash[:alert] = "Email must be unique"
+      format.html { render :new }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -38,7 +60,15 @@ class UsersController < ApplicationController
     @choices = [["Admin", "admin"], ["User", "user"]]
   end
 
+  def user_role
+    (user_params[:role] || "user").to_sym
+  end
+
   def user_params
-    params.require(:user).permit(:name, :email, :time_zone)
+    user_params_allowed = [:name, :email, :role, :time_zone]
+
+    user_params_allowed << :role if current_user.has_role? :admin
+
+    params.require(:user).permit(user_params_allowed)
   end
 end
