@@ -86,10 +86,18 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "GET /update" do
-    it "returns http success" do
-      skip
-      get "/users/update"
+  describe "PUT #update" do
+    it "redirects on update" do
+      user = create(:user)
+
+      put account_user_path(id: user.id), params: {user: {email: "yay@example.com"}}
+      expect(response).to redirect_to(account_users_path)
+    end
+
+    it "re-renders on failure" do
+      user = create(:user)
+
+      put account_user_path(id: user.id), params: {user: {email: nil}}
       expect(response).to have_http_status(:success)
     end
   end
