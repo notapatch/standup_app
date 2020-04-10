@@ -78,10 +78,10 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  describe "GET /edit" do
+  describe "GET #edit" do
     it "returns http success" do
-      skip
-      get "/users/edit"
+      get edit_account_user_path(create(:user))
+
       expect(response).to have_http_status(:success)
     end
   end
