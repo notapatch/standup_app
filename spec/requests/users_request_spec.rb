@@ -35,6 +35,14 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "PUT #update_me" do
+    it "returns http success" do
+      patch update_my_settings_path, params: {user: {name: "John"}}
+
+      expect(response).to redirect_to my_settings_path
+    end
+  end
+
   describe "GET /new" do
     it "returns http success" do
       skip
