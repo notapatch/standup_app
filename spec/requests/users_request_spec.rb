@@ -101,4 +101,13 @@ RSpec.describe "Users", type: :request do
       expect(response).to have_http_status(:success)
     end
   end
+
+  describe "DELETE #destroy" do
+    it "redirects on delete" do
+      user = create(:user)
+
+      delete account_user_path(id: user.id)
+      expect(response).to redirect_to(account_users_path)
+    end
+  end
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :destroy]
   before_action :set_users, only: [:index]
 
   def index
@@ -65,6 +65,17 @@ class UsersController < ApplicationController
         set_choices
         format.html { render :edit }
       end
+    end
+  end
+
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html do
+        redirect_to account_users_path,
+          notice: "User was successfully destroyed."
+      end
+      format.json { head :no_content }
     end
   end
 
