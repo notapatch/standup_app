@@ -32,6 +32,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def password
+    @user = current_user
+  end
+
   def create
     @user = User.unscoped.new(user_params.except("role"))
     @user.account = current_account

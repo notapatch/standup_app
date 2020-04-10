@@ -43,6 +43,14 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "GET #password" do
+    it "returns http success" do
+      get my_password_path
+
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "GET #new" do
     it "returns http success" do
       get new_account_user_path
