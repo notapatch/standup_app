@@ -36,6 +36,21 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def update_password
+    @user = current_user
+    respond_to do |format|
+      if @user.update(user_password_params)
+        bypass_sign_in(@user)
+        format.html {
+          redirect_to my_password_path,
+            notice: "Password was successfully updated."
+        }
+      else
+        format.html { render :password }
+      end
+    end
+  end
+
   def create
     @user = User.unscoped.new(user_params.except("role"))
     @user.account = current_account
@@ -108,5 +123,9 @@ class UsersController < ApplicationController
     user_params_allowed << :role if current_user.has_role? :admin
 
     params.require(:user).permit(user_params_allowed)
+  end
+
+  def user_password_params
+    params.require(:user).permit(:password, :password_confirmation)
   end
 end

@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.describe "Users", type: :request do
   let(:admin_account) { create(:admin_account) }
   let(:admin_account_with_users) { create(:admin_account_with_users) }
+  let(:user) { create(:user) }
 
   before do
     sign_in admin_account
@@ -46,6 +47,29 @@ RSpec.describe "Users", type: :request do
   describe "GET #password" do
     it "returns http success" do
       get my_password_path
+
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "PATCH #update_password" do
+    before do
+      sign_out admin_account
+      sign_in user
+    end
+
+    it "succeeds with valid password" do
+      patch my_update_password_path(id: user.id),
+        params: {user: {password: "d2g4j6ml",
+                        password_confirmation: "d2g4j6ml"}}
+
+      expect(response).to redirect_to my_password_path
+    end
+
+    it "fails with invalid passwords" do
+      patch my_update_password_path(id: user.id),
+        params: {user: {password: "123",
+                        password_confirmation: "123"}}
 
       expect(response).to have_http_status(:success)
     end
