@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit]
+  before_action :set_user, only: [:edit, :update]
   before_action :set_users, only: [:index]
 
   def index
@@ -51,6 +51,20 @@ class UsersController < ApplicationController
     rescue ActiveRecord::RecordNotUnique
       flash[:alert] = "Email must be unique"
       format.html { render :new }
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @user.update(user_params.except("role"))
+        format.html {
+          redirect_to account_users_path,
+            notice: "User was successfully updated."
+        }
+      else
+        set_choices
+        format.html { render :edit }
+      end
     end
   end
 
