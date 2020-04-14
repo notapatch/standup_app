@@ -25,7 +25,7 @@
                   <h4>
                     <%= "#{pluralize(@user.errors.count, 'error')}" %>
                   </h4>
-                  <%= @user.errors.full_messages.map{|msg| content_tag(:li, msg)}.join %>
+                  <%= sanitize(@user.errors.full_messages.map{|msg| content_tag(:li, msg)}.join) %>
                 </div>
               <% end %>
               <%= label_tag 'user[name]', 'Name', class: 'control-label col-lg-2' %>
