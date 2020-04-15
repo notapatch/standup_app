@@ -5,4 +5,11 @@ module SystemMacros
     login_as(user, scope: :user)
     user
   end
+
+  def admin_create_and_login
+    admin = FactoryBot.create(:admin_account)
+    admin.add_role :admin
+    login_as(admin, scope: :user)
+    admin
+  end
 end
